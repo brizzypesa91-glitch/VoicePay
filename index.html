@@ -12,154 +12,217 @@
 
     <div class="header">
         <div class="logo">
-            <span class="mic-icon">🎙️</span>
-            <h1>VoicePay</h1>
+            <div class="logo-icon">🎙️</div>
+            <div>
+                <h1>VoicePay</h1>
+                <span class="sub-logo">Earn by Voice</span>
+            </div>
         </div>
-        <div class="profile-icon">👤</div>
+        <div class="header-actions">
+            <div class="notif-btn">🔔 <span class="notif-badge">3</span></div>
+            <div class="profile-avatar">👤</div>
+        </div>
     </div>
 
-    <div class="intro-banner">
-        <span>✨ Record voice kutaka kufanya biashara na utume kwa wateja walipo.</span>
+    <div class="dashboard-card">
+        <div class="dash-header">
+            <span class="dash-label">Available Balance</span>
+            <span class="level-badge">⭐ Level 3</span>
+        </div>
+        <div class="balance-amount" id="salio-txt">TZS 0</div>
+        <div class="today-earnings" id="today-earning-txt">+ TZS 0 today</div>
+        <button class="btn-withdraw">💳 Withdraw</button>
+
+        <div class="mic-graphic">🎙️</div>
     </div>
 
-    <div class="wallet-grid">
-        <div class="wallet-card wallet-balance">
-            <span>Salio la sasa</span>
-            <strong id="salio-txt">TZS 0</strong>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span class="stat-icon">📊</span>
+            <strong id="stat-voices">0</strong>
+            <span>Voices Recorded</span>
         </div>
-        <div class="wallet-card wallet-withdraw">
-            <span>Pesa iliyotolewa</span>
-            <strong>TZS 0</strong>
+        <div class="stat-card">
+            <span class="stat-icon">👛</span>
+            <strong id="stat-earned">TZS 0</strong>
+            <span>Total Earned</span>
         </div>
+        <div class="stat-card">
+            <span class="stat-icon">⏱️</span>
+            <strong id="stat-pending">3</strong>
+            <span>Pending Tasks</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-icon">📈</span>
+            <strong>100%</strong>
+            <span>Approval Rate</span>
+        </div>
+    </div>
+
+    <div class="section-header">
+        <h3>Available Voice Tasks</h3>
+        <span class="see-all">See all ›</span>
     </div>
 
     <div class="tasks-container">
 
         <div class="task-card">
-            <div class="supplier-header">
-                <div class="supplier-info">
-                    <span class="supplier-name">@max store <small class="store-source">from Alibaba</small></span>
-                    <span class="verify-badge" title="Verified Supplier">✓</span>
+            <div class="supplier-row">
+                <div class="supplier-left">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Alibaba_Group_logo.svg/512px-Alibaba_Group_logo.svg.png" alt="Alibaba" class="brand-img">
+                    <div>
+                        <div class="supplier-name">@max_store <span class="verify-check">✓</span></div>
+                        <span class="store-tag">Alibaba Supplier</span>
+                    </div>
                 </div>
-                <div class="price-tag">TZS 12,500</div>
+                <div class="price-badge">TZS 12,500</div>
             </div>
-            <div class="task-instruction">Record voice kwa Messi</div>
-            <div class="message-box">
-                "Mzigo wako wa vifaa vya michezo kutoka Alibaba umewasili. Tafadhali thibitisha anwani yako tukuletee."
+
+            <div class="message-bubble">
+                "Mzigo wako wa vifaa vya michezo kutoka Alibaba umewasili. Tafadhali thibitisha anwani yako ya kutolea mzigo ili tuweze kukukabidhi."
             </div>
+
+            <div class="rec-instruction">
+                <span>🎙️ Record your voice response</span>
+                <span class="time-est">02:45</span>
+            </div>
+
             <div class="visualizer-container" id="visualizer-box-1">
                 <canvas id="visualizer-1"></canvas>
             </div>
-            <div class="action-buttons">
-                <button class="btn btn-primary" id="mainActionBtn-1" onclick="handleMainAction(1, 'Messi')">
+
+            <div class="action-row">
+                <button class="btn btn-red-primary" id="mainActionBtn-1" onclick="handleMainAction(1, 'Messi')">
                     🎙️ Record Voice
                 </button>
-                <button class="btn btn-send" id="sendBtn-1" onclick="handleSendAction(1, 'Messi', 'TZS 12,500', '@max store')">
-                    📤 Send to Messi
+                <button class="btn btn-play-circle" id="playBtn-1" onclick="playAudio(1)" title="Play Recorded Audio">
+                    ▶️
                 </button>
+            </div>
+
+            <button class="btn btn-send-full" id="sendBtn-1" onclick="handleSendAction(1, 'Messi', 'TZS 12,500', '@max_store')">
+                📤 Send Response to Customer
+            </button>
+
+            <div class="card-footer-info">
+                <span>Payment: <strong>TZS 12,500</strong></span>
+                <span>Est. time: <strong>~ 2 min</strong></span>
+                <span class="verified-txt">Supplier Verified ✓</span>
             </div>
         </div>
 
         <div class="task-card">
-            <div class="supplier-header">
-                <div class="supplier-info">
-                    <span class="supplier-name">@aggy electronics <small class="store-source">from Temu</small></span>
-                    <span class="verify-badge" title="Verified Supplier">✓</span>
+            <div class="supplier-row">
+                <div class="supplier-left">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Temu_logo.svg/512px-Temu_logo.svg.png" alt="Temu" class="brand-img">
+                    <div>
+                        <div class="supplier-name">@aggy electronics <span class="verify-check">✓</span></div>
+                        <span class="store-tag">Temu Supplier</span>
+                    </div>
                 </div>
-                <div class="price-tag">TZS 8,400</div>
+                <div class="price-badge">TZS 8,400</div>
             </div>
-            <div class="task-instruction">Record voice kwa Aggy</div>
-            <div class="message-box">
+
+            <div class="message-bubble">
                 "Habari Aggy, smartwatch yako kutoka Temu imefika ofisini. Karibu ukague na uchukue mzigo wako."
             </div>
+
+            <div class="rec-instruction">
+                <span>🎙️ Record your voice response</span>
+                <span class="time-est">02:31</span>
+            </div>
+
             <div class="visualizer-container" id="visualizer-box-2">
                 <canvas id="visualizer-2"></canvas>
             </div>
-            <div class="action-buttons">
-                <button class="btn btn-primary" id="mainActionBtn-2" onclick="handleMainAction(2, 'Aggy')">
+
+            <div class="action-row">
+                <button class="btn btn-red-primary" id="mainActionBtn-2" onclick="handleMainAction(2, 'Aggy')">
                     🎙️ Record Voice
                 </button>
-                <button class="btn btn-send" id="sendBtn-2" onclick="handleSendAction(2, 'Aggy', 'TZS 8,400', '@aggy electronics')">
-                    📤 Send to Aggy
+                <button class="btn btn-play-circle" id="playBtn-2" onclick="playAudio(2)">
+                    ▶️
                 </button>
+            </div>
+
+            <button class="btn btn-send-full" id="sendBtn-2" onclick="handleSendAction(2, 'Aggy', 'TZS 8,400', '@aggy electronics')">
+                📤 Send Response to Customer
+            </button>
+
+            <div class="card-footer-info">
+                <span>Payment: <strong>TZS 8,400</strong></span>
+                <span>Est. time: <strong>~ 2 min</strong></span>
+                <span class="verified-txt">Supplier Verified ✓</span>
             </div>
         </div>
 
         <div class="task-card">
-            <div class="supplier-header">
-                <div class="supplier-info">
-                    <span class="supplier-name">@brizzy fashion <small class="store-source">from Amazon</small></span>
-                    <span class="verify-badge" title="Verified Supplier">✓</span>
+            <div class="supplier-row">
+                <div class="supplier-left">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" class="brand-img amazon-fix">
+                    <div>
+                        <div class="supplier-name">@brizzy fashion <span class="verify-check">✓</span></div>
+                        <span class="store-tag">Amazon Supplier</span>
+                    </div>
                 </div>
-                <div class="price-tag">TZS 14,800</div>
+                <div class="price-badge">TZS 14,800</div>
             </div>
-            <div class="task-instruction">Record voice kwa Kelvin</div>
-            <div class="message-box">
+
+            <div class="message-bubble">
                 "Nguo zako mpya ulizoagiza Amazon zimeshawasili. Unakaribishwa kufanya vipimo vya mwisho."
             </div>
+
+            <div class="rec-instruction">
+                <span>🎙️ Record your voice response</span>
+                <span class="time-est">02:20</span>
+            </div>
+
             <div class="visualizer-container" id="visualizer-box-3">
                 <canvas id="visualizer-3"></canvas>
             </div>
-            <div class="action-buttons">
-                <button class="btn btn-primary" id="mainActionBtn-3" onclick="handleMainAction(3, 'Kelvin')">
+
+            <div class="action-row">
+                <button class="btn btn-red-primary" id="mainActionBtn-3" onclick="handleMainAction(3, 'Kelvin')">
                     🎙️ Record Voice
                 </button>
-                <button class="btn btn-send" id="sendBtn-3" onclick="handleSendAction(3, 'Kelvin', 'TZS 14,800', '@brizzy fashion')">
-                    📤 Send to Kelvin
+                <button class="btn btn-play-circle" id="playBtn-3" onclick="playAudio(3)">
+                    ▶️
                 </button>
+            </div>
+
+            <button class="btn btn-send-full" id="sendBtn-3" onclick="handleSendAction(3, 'Kelvin', 'TZS 14,800', '@brizzy fashion')">
+                📤 Send Response to Customer
+            </button>
+
+            <div class="card-footer-info">
+                <span>Payment: <strong>TZS 14,800</strong></span>
+                <span>Est. time: <strong>~ 2 min</strong></span>
+                <span class="verified-txt">Supplier Verified ✓</span>
             </div>
         </div>
 
-        <div class="task-card">
-            <div class="supplier-header">
-                <div class="supplier-info">
-                    <span class="supplier-name">@smart auto spares <small class="store-source">from AliExpress</small></span>
-                    <span class="verify-badge" title="Verified Supplier">✓</span>
-                </div>
-                <div class="price-tag">TZS 9,600</div>
-            </div>
-            <div class="task-instruction">Record voice kwa Sarah</div>
-            <div class="message-box">
-                "Spare ya gari uliyotagiza AliExpress imewasili leo. Unaweza kuja kuichukua muda wowote."
-            </div>
-            <div class="visualizer-container" id="visualizer-box-4">
-                <canvas id="visualizer-4"></canvas>
-            </div>
-            <div class="action-buttons">
-                <button class="btn btn-primary" id="mainActionBtn-4" onclick="handleMainAction(4, 'Sarah')">
-                    🎙️ Record Voice
-                </button>
-                <button class="btn btn-send" id="sendBtn-4" onclick="handleSendAction(4, 'Sarah', 'TZS 9,600', '@smart auto spares')">
-                    📤 Send to Sarah
-                </button>
-            </div>
-        </div>
+    </div>
 
-        <div class="task-card">
-            <div class="supplier-header">
-                <div class="supplier-info">
-                    <span class="supplier-name">@kiboo mall <small class="store-source">from Shein</small></span>
-                    <span class="verify-badge" title="Verified Supplier">✓</span>
-                </div>
-                <div class="price-tag">TZS 6,500</div>
-            </div>
-            <div class="task-instruction">Record voice kwa Amina</div>
-            <div class="message-box">
-                "Mzigo wako wa vipodozi na viatu kutoka Shein uko tayari kwa ajili ya kufanyiwa delivery."
-            </div>
-            <div class="visualizer-container" id="visualizer-box-5">
-                <canvas id="visualizer-5"></canvas>
-            </div>
-            <div class="action-buttons">
-                <button class="btn btn-primary" id="mainActionBtn-5" onclick="handleMainAction(5, 'Amina')">
-                    🎙️ Record Voice
-                </button>
-                <button class="btn btn-send" id="sendBtn-5" onclick="handleSendAction(5, 'Amina', 'TZS 6,500', '@kiboo mall')">
-                    📤 Send to Amina
-                </button>
-            </div>
+    <div class="bottom-nav">
+        <div class="nav-item active">
+            <span class="nav-icon">🏠</span>
+            <span>Home</span>
         </div>
-
+        <div class="nav-item">
+            <span class="nav-icon">📋</span>
+            <span>Tasks</span>
+        </div>
+        <div class="nav-center-btn">
+            <div class="mic-circle-btn">🎙️</div>
+        </div>
+        <div class="nav-item">
+            <span class="nav-icon">📊</span>
+            <span>Earnings</span>
+        </div>
+        <div class="nav-item">
+            <span class="nav-icon">👤</span>
+            <span>Profile</span>
+        </div>
     </div>
 
 </div>
@@ -168,7 +231,7 @@
     <div class="modal-card">
         <div class="modal-icon">🎉</div>
         <h2 class="modal-title">Task Completed!</h2>
-        <p class="modal-message" id="modalMessage">Hongera! Umelipwa TZS 12,500 kutoka Max Store.</p>
+        <p class="modal-message" id="modalMessage">Hongera! Umelipwa TZS 12,500 kutoka @max_store.</p>
         <div class="transaction-box">
             <span>Kumbukumbu ya Muamala:</span>
             <strong id="txnCode">TXN-8392019482DH</strong>

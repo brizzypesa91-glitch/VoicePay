@@ -15,10 +15,16 @@ let dataArray = null;
 let bufferLength = null;
 let animationId = null;
 
+let totalVoicesRecorded = 0;
+let jumlaSalio = 0;
+let todayEarnings = 0;
+let pendingTasks = 3; // Inaanzia kadi 3 za wazi
+
 const audioPlayback = document.getElementById('audioPlayback');
 
 async function handleMainAction(taskId, mteja) {
     const mainBtn = document.getElementById(`mainActionBtn-${taskId}`);
+    const playBtn = document.getElementById(`playBtn-${taskId}`);
     const visualizerBox = document.getElementById(`visualizer-box-${taskId}`);
     const canvas = document.getElementById(`visualizer-${taskId}`);
     const canvasCtx = canvas.getContext('2d');
@@ -30,7 +36,6 @@ async function handleMainAction(taskId, mteja) {
     let task = taskData[taskId];
 
     if (task.state === TASK_STATES.IDLE || task.state === TASK_STATES.COMPLETED) {
-        // --- HATUA YA 1: ANZA KUREKODI ---
         try {
             activeStream = await navigator.mediaDevices.getUserMedia({ audio: true });
             
@@ -45,9 +50,7 @@ async function handleMainAction(taskId, mteja) {
             task.chunks = [];
 
             activeMediaRecorder.ondataavailable = event => {
-                if (event.data && event.data.size > 0) {
-                    task.chunks.push(event.data);
-                }
+                if (event.data && event.data.size > 0) task.chunks.push(event.data);
             };
 
             activeMediaRecorder.start(100);
@@ -64,14 +67,9 @@ async function handleMainAction(taskId, mteja) {
         }
 
     } else if (task.state === TASK_STATES.RECORDING) {
-        // --- HATUA YA 2: STOP REKODI & PREPARE AUDIO ---
         if (activeMediaRecorder && activeMediaRecorder.state !== 'inactive') {
-            
             activeMediaRecorder.onstop = () => {
-                if (activeStream) {
-                    activeStream.getTracks().forEach(track => track.stop());
-                }
-
+                if (activeStream) activeStream.getTracks().forEach(track => track.stop());
                 if (animationId) cancelAnimationFrame(animationId);
                 visualizerBox.style.display = 'none';
 
@@ -83,8 +81,10 @@ async function handleMainAction(taskId, mteja) {
                 
                 task.state = TASK_STATES.REVIEW;
 
-                mainBtn.innerHTML = `▶️ Play Audio`;
-                mainBtn.className = 'btn btn-review';
+                mainBtn.innerHTML = `🎙️ Re-record`;
+                mainBtn.className = 'btn btn-red-primary';
+
+                playBtn.classList.add('active');
 
                 const sendBtn = document.getElementById(`sendBtn-${taskId}`);
                 sendBtn.classList.add('ready-to-send');
@@ -92,18 +92,14 @@ async function handleMainAction(taskId, mteja) {
 
             activeMediaRecorder.stop();
         }
+    }
+}
 
-    } else if (task.state === TASK_STATES.REVIEW) {
-        // --- HATUA YA 3: PLAYBACK ---
-        if (task.audioUrl) {
-            audioPlayback.src = task.audioUrl;
-            audioPlayback.play().catch(e => console.error("Error playing audio:", e));
-
-            mainBtn.innerHTML = `🔊 Playing...`;
-            audioPlayback.onended = () => {
-                mainBtn.innerHTML = `▶️ Replay Audio`;
-            };
-        }
+function playAudio(taskId) {
+    let task = taskData[taskId];
+    if (task && task.audioUrl) {
+        audioPlayback.src = task.audioUrl;
+        audioPlayback.play().catch(e => console.error("Error playing audio:", e));
     }
 }
 
@@ -118,35 +114,44 @@ function handleSendAction(taskId, mteja, priceStr, storeName) {
     const sendBtn = document.getElementById(`sendBtn-${taskId}`);
 
     task.state = TASK_STATES.SENDING;
-    sendBtn.innerHTML = `<span class="spinner"></span> Sending...`;
-    sendBtn.classList.remove('ready-to-send');
-    sendBtn.classList.add('sending-state');
+    sendBtn.innerHTML = `⏳ Sending Response...`;
 
     setTimeout(() => {
         task.state = TASK_STATES.COMPLETED;
         
-        mainBtn.innerHTML = `✓ Voice Recorded`;
-        mainBtn.className = 'btn btn-recorded-complete';
+        mainBtn.innerHTML = `✓ Recorded`;
+        mainBtn.disabled = true;
+        mainBtn.style.opacity = '0.5';
         
         sendBtn.innerHTML = `✓ Sent to ${mteja}`;
-        sendBtn.className = 'btn btn-sent-complete';
+        sendBtn.classList.remove('ready-to-send');
+        sendBtn.style.background = '#059669';
+        sendBtn.style.color = '#ffffff';
 
-        // 1. Ongeza Salio
+        // 1. Update Recorded Count
+        totalVoicesRecorded++;
+        document.getElementById('stat-voices').innerText = totalVoicesRecorded;
+
+        // 2. Update Pending Tasks Count (Inapungua)
+        if (pendingTasks > 0) {
+            pendingTasks--;
+            document.getElementById('stat-pending').innerText = pendingTasks;
+        }
+
+        // 3. Update Balance & Today's Earnings
         ongezaSalio(priceStr);
 
-        // 2. Onyesha Popup ya Malipo (Payment Notification)
+        // 4. Show Payment Notification Popup
         showPaymentModal(priceStr, storeName);
 
-    }, 2000);
+    }, 1800);
 }
 
-// Function ya Onyesha Popup ya Malipo
 function showPaymentModal(priceStr, storeName) {
     const modal = document.getElementById('paymentModal');
     const modalMsg = document.getElementById('modalMessage');
     const txnCode = document.getElementById('txnCode');
 
-    // Tengeneza kodi ya muamala ya uongo mfano: TXN-83920194DH
     const randomTxn = 'TXN-' + Math.floor(10000000 + Math.random() * 90000000) + 'DH';
 
     modalMsg.innerText = `Hongera! Umelipwa ${priceStr} kutoka ${storeName}.`;
@@ -155,17 +160,13 @@ function showPaymentModal(priceStr, storeName) {
     modal.style.display = 'flex';
 }
 
-// Function ya Funga Popup
 function closePaymentModal() {
-    const modal = document.getElementById('paymentModal');
-    modal.style.display = 'none';
+    document.getElementById('paymentModal').style.display = 'none';
 }
 
 function setupVisualizer(stream, canvas, canvasCtx) {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    if (audioCtx.state === 'suspended') {
-        audioCtx.resume();
-    }
+    if (audioCtx.state === 'suspended') audioCtx.resume();
     
     analyser = audioCtx.createAnalyser();
     const source = audioCtx.createMediaStreamSource(stream);
@@ -179,23 +180,28 @@ function setupVisualizer(stream, canvas, canvasCtx) {
 function drawWaves(canvas, canvasCtx) {
     animationId = requestAnimationFrame(() => drawWaves(canvas, canvasCtx));
     analyser.getByteFrequencyData(dataArray);
-    canvasCtx.fillStyle = '#030712';
+    canvasCtx.fillStyle = '#060913';
     canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
     const barWidth = (canvas.width / bufferLength) * 1.5;
     let x = 0;
     for (let i = 0; i < bufferLength; i++) {
         const barHeight = dataArray[i] / 3.5;
-        canvasCtx.fillStyle = '#38bdf8'; 
+        canvasCtx.fillStyle = '#dc2626'; 
         canvasCtx.fillRect(x, canvas.height/2 - barHeight/2, barWidth, barHeight);
         x += barWidth + 2;
     }
 }
 
-let jumlaSalio = 0;
 function ongezaSalio(priceStr) {
     let priceNum = parseInt(priceStr.replace(/[^0-9]/g, ''));
     if(!isNaN(priceNum)) {
+        // Balance
         jumlaSalio += priceNum;
         document.getElementById('salio-txt').innerText = `TZS ${jumlaSalio.toLocaleString()}`;
+        document.getElementById('stat-earned').innerText = `TZS ${jumlaSalio.toLocaleString()}`;
+
+        // Today's Earning
+        todayEarnings += priceNum;
+        document.getElementById('today-earning-txt').innerText = `+ TZS ${todayEarnings.toLocaleString()} today`;
     }
 }
