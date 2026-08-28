@@ -34,7 +34,6 @@ async function handleMainAction(taskId, mteja) {
         try {
             activeStream = await navigator.mediaDevices.getUserMedia({ audio: true });
             
-            // Tumia format inayokubalika na browser husika (Safari/Chrome/Android)
             let options = {};
             if (MediaRecorder.isTypeSupported('audio/webm')) {
                 options = { mimeType: 'audio/webm' };
@@ -51,7 +50,6 @@ async function handleMainAction(taskId, mteja) {
                 }
             };
 
-            // Rekodi kwa vipindi vya mswaki wa millisecond 100 ili data isipotee
             activeMediaRecorder.start(100);
             task.state = TASK_STATES.RECORDING;
 
@@ -63,24 +61,20 @@ async function handleMainAction(taskId, mteja) {
 
         } catch (err) {
             alert('Tafadhali ruhusu microphone kwenye browser yako ili kurekodi sauti.');
-            console.error("Microphone error: ", err);
         }
 
     } else if (task.state === TASK_STATES.RECORDING) {
-        // --- HATUA YA 2: SIMAMISHA KUREKODI & TAYARISHA AUDI0 ---
+        // --- HATUA YA 2: STOP REKODI & PREPARE AUDIO ---
         if (activeMediaRecorder && activeMediaRecorder.state !== 'inactive') {
             
             activeMediaRecorder.onstop = () => {
-                // Zima microphone stream
                 if (activeStream) {
                     activeStream.getTracks().forEach(track => track.stop());
                 }
 
-                // Zima waves visualizer
                 if (animationId) cancelAnimationFrame(animationId);
                 visualizerBox.style.display = 'none';
 
-                // Tengeneza blob halisi ya sauti
                 const mimeType = activeMediaRecorder.mimeType || 'audio/webm';
                 task.audioBlob = new Blob(task.chunks, { type: mimeType });
                 
@@ -89,11 +83,9 @@ async function handleMainAction(taskId, mteja) {
                 
                 task.state = TASK_STATES.REVIEW;
 
-                // Badilisha muonekano wa Button
                 mainBtn.innerHTML = `▶️ Play Audio`;
                 mainBtn.className = 'btn btn-review';
 
-                // Wezesha button ya Kutuma (Send)
                 const sendBtn = document.getElementById(`sendBtn-${taskId}`);
                 sendBtn.classList.add('ready-to-send');
             };
@@ -102,15 +94,11 @@ async function handleMainAction(taskId, mteja) {
         }
 
     } else if (task.state === TASK_STATES.REVIEW) {
-        // --- HATUA YA 3: CHEZA SAUTI (PLAYBACK) ---
+        // --- HATUA YA 3: PLAYBACK ---
         if (task.audioUrl) {
             audioPlayback.src = task.audioUrl;
-            audioPlayback.play().catch(e => {
-                console.error("Error playing audio:", e);
-                alert("Kuna shida kwenye kucheza sauti. Jaribu kurekodi tena.");
-            });
+            audioPlayback.play().catch(e => console.error("Error playing audio:", e));
 
-            // Athari ya kuonyesha inacheza
             mainBtn.innerHTML = `🔊 Playing...`;
             audioPlayback.onended = () => {
                 mainBtn.innerHTML = `▶️ Replay Audio`;
@@ -119,7 +107,7 @@ async function handleMainAction(taskId, mteja) {
     }
 }
 
-function handleSendAction(taskId, mteja, priceStr) {
+function handleSendAction(taskId, mteja, priceStr, storeName) {
     let task = taskData[taskId];
     if (!task || task.state !== TASK_STATES.REVIEW) {
         alert("Tafadhali kwanza rekodi sauti na uisikilize kabla ya kutuma!");
@@ -137,16 +125,40 @@ function handleSendAction(taskId, mteja, priceStr) {
     setTimeout(() => {
         task.state = TASK_STATES.COMPLETED;
         
-        // Button ya juu: Recorded/Verified Status (Kijani Safi ya Mint)
         mainBtn.innerHTML = `✓ Voice Recorded`;
         mainBtn.className = 'btn btn-recorded-complete';
         
-        // Button ya chini: Sent Status (Kijani ya Neon/Emerald)
         sendBtn.innerHTML = `✓ Sent to ${mteja}`;
         sendBtn.className = 'btn btn-sent-complete';
 
+        // 1. Ongeza Salio
         ongezaSalio(priceStr);
+
+        // 2. Onyesha Popup ya Malipo (Payment Notification)
+        showPaymentModal(priceStr, storeName);
+
     }, 2000);
+}
+
+// Function ya Onyesha Popup ya Malipo
+function showPaymentModal(priceStr, storeName) {
+    const modal = document.getElementById('paymentModal');
+    const modalMsg = document.getElementById('modalMessage');
+    const txnCode = document.getElementById('txnCode');
+
+    // Tengeneza kodi ya muamala ya uongo mfano: TXN-83920194DH
+    const randomTxn = 'TXN-' + Math.floor(10000000 + Math.random() * 90000000) + 'DH';
+
+    modalMsg.innerText = `Hongera! Umelipwa ${priceStr} kutoka ${storeName}.`;
+    txnCode.innerText = randomTxn;
+
+    modal.style.display = 'flex';
+}
+
+// Function ya Funga Popup
+function closePaymentModal() {
+    const modal = document.getElementById('paymentModal');
+    modal.style.display = 'none';
 }
 
 function setupVisualizer(stream, canvas, canvasCtx) {

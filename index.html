@@ -10,7 +10,6 @@
 
 <div class="app-container">
 
-    <!-- Header Section -->
     <div class="header">
         <div class="logo">
             <span class="mic-icon">🎙️</span>
@@ -19,12 +18,10 @@
         <div class="profile-icon">👤</div>
     </div>
 
-    <!-- Intro Banner -->
     <div class="intro-banner">
         <span>✨ Record voice kutaka kufanya biashara na utume kwa wateja walipo.</span>
     </div>
 
-    <!-- Wallet / Salio Grid -->
     <div class="wallet-grid">
         <div class="wallet-card wallet-balance">
             <span>Salio la sasa</span>
@@ -36,10 +33,8 @@
         </div>
     </div>
 
-    <!-- TASK LIST SECTION -->
     <div class="tasks-container">
 
-        <!-- SUPPLIER 1 -->
         <div class="task-card">
             <div class="supplier-header">
                 <div class="supplier-info">
@@ -59,13 +54,12 @@
                 <button class="btn btn-primary" id="mainActionBtn-1" onclick="handleMainAction(1, 'Messi')">
                     🎙️ Record Voice
                 </button>
-                <button class="btn btn-send" id="sendBtn-1" onclick="handleSendAction(1, 'Messi', 'TZS 12,500')">
+                <button class="btn btn-send" id="sendBtn-1" onclick="handleSendAction(1, 'Messi', 'TZS 12,500', '@max store')">
                     📤 Send to Messi
                 </button>
             </div>
         </div>
 
-        <!-- SUPPLIER 2 -->
         <div class="task-card">
             <div class="supplier-header">
                 <div class="supplier-info">
@@ -85,13 +79,12 @@
                 <button class="btn btn-primary" id="mainActionBtn-2" onclick="handleMainAction(2, 'Aggy')">
                     🎙️ Record Voice
                 </button>
-                <button class="btn btn-send" id="sendBtn-2" onclick="handleSendAction(2, 'Aggy', 'TZS 8,400')">
+                <button class="btn btn-send" id="sendBtn-2" onclick="handleSendAction(2, 'Aggy', 'TZS 8,400', '@aggy electronics')">
                     📤 Send to Aggy
                 </button>
             </div>
         </div>
 
-        <!-- SUPPLIER 3 -->
         <div class="task-card">
             <div class="supplier-header">
                 <div class="supplier-info">
@@ -111,13 +104,12 @@
                 <button class="btn btn-primary" id="mainActionBtn-3" onclick="handleMainAction(3, 'Kelvin')">
                     🎙️ Record Voice
                 </button>
-                <button class="btn btn-send" id="sendBtn-3" onclick="handleSendAction(3, 'Kelvin', 'TZS 14,800')">
+                <button class="btn btn-send" id="sendBtn-3" onclick="handleSendAction(3, 'Kelvin', 'TZS 14,800', '@brizzy fashion')">
                     📤 Send to Kelvin
                 </button>
             </div>
         </div>
 
-        <!-- SUPPLIER 4 -->
         <div class="task-card">
             <div class="supplier-header">
                 <div class="supplier-info">
@@ -137,13 +129,12 @@
                 <button class="btn btn-primary" id="mainActionBtn-4" onclick="handleMainAction(4, 'Sarah')">
                     🎙️ Record Voice
                 </button>
-                <button class="btn btn-send" id="sendBtn-4" onclick="handleSendAction(4, 'Sarah', 'TZS 9,600')">
+                <button class="btn btn-send" id="sendBtn-4" onclick="handleSendAction(4, 'Sarah', 'TZS 9,600', '@smart auto spares')">
                     📤 Send to Sarah
                 </button>
             </div>
         </div>
 
-        <!-- SUPPLIER 5 -->
         <div class="task-card">
             <div class="supplier-header">
                 <div class="supplier-info">
@@ -163,60 +154,8 @@
                 <button class="btn btn-primary" id="mainActionBtn-5" onclick="handleMainAction(5, 'Amina')">
                     🎙️ Record Voice
                 </button>
-                <button class="btn btn-send" id="sendBtn-5" onclick="handleSendAction(5, 'Amina', 'TZS 6,500')">
+                <button class="btn btn-send" id="sendBtn-5" onclick="handleSendAction(5, 'Amina', 'TZS 6,500', '@kiboo mall')">
                     📤 Send to Amina
-                </button>
-            </div>
-        </div>
-
-        <!-- SUPPLIER 6 -->
-        <div class="task-card">
-            <div class="supplier-header">
-                <div class="supplier-info">
-                    <span class="supplier-name">@lunar tech <small class="store-source">from eBay</small></span>
-                    <span class="verify-badge" title="Verified Supplier">✓</span>
-                </div>
-                <div class="price-tag">TZS 11,200</div>
-            </div>
-            <div class="task-instruction">Record voice kwa David</div>
-            <div class="message-box">
-                "Kamera na microfoni uliyotagiza eBay imepokelewa darajani. Karibu uthibitishe upokeaji."
-            </div>
-            <div class="visualizer-container" id="visualizer-box-6">
-                <canvas id="visualizer-6"></canvas>
-            </div>
-            <div class="action-buttons">
-                <button class="btn btn-primary" id="mainActionBtn-6" onclick="handleMainAction(6, 'David')">
-                    🎙️ Record Voice
-                </button>
-                <button class="btn btn-send" id="sendBtn-6" onclick="handleSendAction(6, 'David', 'TZS 11,200')">
-                    📤 Send to David
-                </button>
-            </div>
-        </div>
-
-        <!-- SUPPLIER 7 -->
-        <div class="task-card">
-            <div class="supplier-header">
-                <div class="supplier-info">
-                    <span class="supplier-name">@afri beauty <small class="store-source">from Taobao</small></span>
-                    <span class="verify-badge" title="Verified Supplier">✓</span>
-                </div>
-                <div class="price-tag">TZS 7,800</div>
-            </div>
-            <div class="task-instruction">Record voice kwa Fatma</div>
-            <div class="message-box">
-                "Oda yako ya wigi na mafuta kutoka Taobao iko njiani kuletwa kwako hivi sasa."
-            </div>
-            <div class="visualizer-container" id="visualizer-box-7">
-                <canvas id="visualizer-7"></canvas>
-            </div>
-            <div class="action-buttons">
-                <button class="btn btn-primary" id="mainActionBtn-7" onclick="handleMainAction(7, 'Fatma')">
-                    🎙️ Record Voice
-                </button>
-                <button class="btn btn-send" id="sendBtn-7" onclick="handleSendAction(7, 'Fatma', 'TZS 7,800')">
-                    📤 Send to Fatma
                 </button>
             </div>
         </div>
@@ -225,7 +164,19 @@
 
 </div>
 
-<!-- Audio Player ya siri kwa ajili ya kusikilizia -->
+<div class="modal-overlay" id="paymentModal">
+    <div class="modal-card">
+        <div class="modal-icon">🎉</div>
+        <h2 class="modal-title">Task Completed!</h2>
+        <p class="modal-message" id="modalMessage">Hongera! Umelipwa TZS 12,500 kutoka Max Store.</p>
+        <div class="transaction-box">
+            <span>Kumbukumbu ya Muamala:</span>
+            <strong id="txnCode">TXN-8392019482DH</strong>
+        </div>
+        <button class="btn btn-modal-close" onclick="closePaymentModal()">Sawa / Endelea</button>
+    </div>
+</div>
+
 <audio id="audioPlayback" style="display: none;"></audio>
 
 <script src="script.js"></script>
