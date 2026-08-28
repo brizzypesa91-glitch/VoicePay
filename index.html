@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoicePay - Earn by Voice</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-container">
+
+    <div class="header">
+        <div class="logo">
+            <span class="mic-icon">🎙️</span>
+            <h1>VoicePay</h1>
+        </div>
+        <div class="profile-icon">👤</div>
+    </div>
+
+    <div class="intro-banner">
+        <span>✨ Record voice kutaka kufanya biashara na utume kwa wateja walipo.</span>
+    </div>
+
+    <div class="wallet-grid">
+        <div class="wallet-card wallet-balance">
+            <span>Salio la sasa</span>
+            <strong id="salio-txt">TZS 0</strong>
+        </div>
+        <div class="wallet-card wallet-withdraw">
+            <span>Pesa iliyotolewa</span>
+            <strong>TZS 0</strong>
+        </div>
+    </div>
+
+    <div class="tasks-container">
+
+        <div class="task-card">
+            <div class="supplier-header">
+                <div class="supplier-info">
+                    <span class="supplier-name">@mark store</span>
+                    <span class="verify-badge" title="Verified Supplier">✓</span>
+                </div>
+                <div class="price-tag">TZS 20,000</div>
+            </div>
+            <div class="task-instruction">Record voice kwa Messi</div>
+            <div class="message-box">
+                "Mzigo wako upo tayari. Tembelea ofisi zetu ukachukue mzigo wako au piga simu tukuletee."
+            </div>
+            <div class="visualizer-container" id="visualizer-box-1">
+                <canvas id="visualizer-1"></canvas>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="mainActionBtn-1" onclick="handleMainAction(1, 'Messi')">
+                    🎙️ Record Voice
+                </button>
+                <button class="btn btn-send" id="sendBtn-1" onclick="handleSendAction(1, 'Messi', 'TZS 20,000')">
+                    📤 Send to Messi
+                </button>
+            </div>
+        </div>
+
+        <div class="task-card">
+            <div class="supplier-header">
+                <div class="supplier-info">
+                    <span class="supplier-name">@aggy electronics</span>
+                    <span class="verify-badge" title="Verified Supplier">✓</span>
+                </div>
+                <div class="price-tag">TZS 15,000</div>
+            </div>
+            <div class="task-instruction">Record voice kwa Aggy</div>
+            <div class="message-box">
+                "Habari Aggy, TV yako uliyoiagiza imewasili leo. Tafadhali thibitisha anwani yako tukuletee mzigo."
+            </div>
+            <div class="visualizer-container" id="visualizer-box-2">
+                <canvas id="visualizer-2"></canvas>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="mainActionBtn-2" onclick="handleMainAction(2, 'Aggy')">
+                    🎙️ Record Voice
+                </button>
+                <button class="btn btn-send" id="sendBtn-2" onclick="handleSendAction(2, 'Aggy', 'TZS 15,000')">
+                    📤 Send to Aggy
+                </button>
+            </div>
+        </div>
+
+        <div class="task-card">
+            <div class="supplier-header">
+                <div class="supplier-info">
+                    <span class="supplier-name">@brizzy fashion</span>
+                    <span class="verify-badge" title="Verified Supplier">✓</span>
+                </div>
+                <div class="price-tag">TZS 35,000</div>
+            </div>
+            <div class="task-instruction">Record voice kwa Kelvin</div>
+            <div class="message-box">
+                "Nguo zako mpya zimeshakamilika kushonwa. Unakaribishwa dukani kwetu kufanya kipimo cha mwisho."
+            </div>
+            <div class="visualizer-container" id="visualizer-box-3">
+                <canvas id="visualizer-3"></canvas>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-primary" id="mainActionBtn-3" onclick="handleMainAction(3, 'Kelvin')">
+                    🎙️ Record Voice
+                </button>
+                <button class="btn btn-send" id="sendBtn-3" onclick="handleSendAction(3, 'Kelvin', 'TZS 35,000')">
+                    📤 Send to Kelvin
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<audio id="audioPlayback" style="display: none;"></audio>
+
+<script src="script.js"></script>
+</body>
+</html>
