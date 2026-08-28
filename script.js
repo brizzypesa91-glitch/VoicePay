@@ -18,7 +18,7 @@ let animationId = null;
 let totalVoicesRecorded = 0;
 let jumlaSalio = 0;
 let todayEarnings = 0;
-let pendingTasks = 3; // Inaanzia kadi 3 za wazi
+let pendingTasks = 7; // Imebadilika kufikia 7 kadi
 
 const audioPlayback = document.getElementById('audioPlayback');
 
@@ -128,20 +128,20 @@ function handleSendAction(taskId, mteja, priceStr, storeName) {
         sendBtn.style.background = '#059669';
         sendBtn.style.color = '#ffffff';
 
-        // 1. Update Recorded Count
+        // Update Voices
         totalVoicesRecorded++;
         document.getElementById('stat-voices').innerText = totalVoicesRecorded;
 
-        // 2. Update Pending Tasks Count (Inapungua)
+        // Update Pending Tasks
         if (pendingTasks > 0) {
             pendingTasks--;
             document.getElementById('stat-pending').innerText = pendingTasks;
         }
 
-        // 3. Update Balance & Today's Earnings
+        // Update Balance
         ongezaSalio(priceStr);
 
-        // 4. Show Payment Notification Popup
+        // Show Modal
         showPaymentModal(priceStr, storeName);
 
     }, 1800);
@@ -195,12 +195,10 @@ function drawWaves(canvas, canvasCtx) {
 function ongezaSalio(priceStr) {
     let priceNum = parseInt(priceStr.replace(/[^0-9]/g, ''));
     if(!isNaN(priceNum)) {
-        // Balance
         jumlaSalio += priceNum;
         document.getElementById('salio-txt').innerText = `TZS ${jumlaSalio.toLocaleString()}`;
         document.getElementById('stat-earned').innerText = `TZS ${jumlaSalio.toLocaleString()}`;
 
-        // Today's Earning
         todayEarnings += priceNum;
         document.getElementById('today-earning-txt').innerText = `+ TZS ${todayEarnings.toLocaleString()} today`;
     }

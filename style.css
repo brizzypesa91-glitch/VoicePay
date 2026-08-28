@@ -249,21 +249,27 @@ body {
     gap: 10px;
 }
 
-/* Logo styling kwa wauzaji */
+/* High-Quality Custom Brand Badges */
 .brand-img {
-    width: 38px;
-    height: 38px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-    object-fit: contain;
-    background: #ffffff;
-    padding: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 14px;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-.brand-img.amazon-fix {
-    padding: 6px;
-    background: #ffffff;
-}
+.logo-max { background: linear-gradient(135deg, #ff6a00, #ee0979); }
+.logo-aggy { background: linear-gradient(135deg, #00c6ff, #0072ff); font-size: 18px; }
+.logo-breeze { background: linear-gradient(135deg, #f7797d, #FBD786); font-size: 18px; }
+.logo-kikuu { background: linear-gradient(135deg, #e52d27, #b31217); }
+.logo-shopee { background: linear-gradient(135deg, #ff5722, #ff9800); font-size: 18px; }
+.logo-trendyol { background: linear-gradient(135deg, #8e2de2, #4a00e0); }
+.logo-fastexpress { background: linear-gradient(135deg, #11998e, #38ef7d); font-size: 18px; }
 
 .supplier-name {
     font-weight: 700;
@@ -329,7 +335,6 @@ body {
     transition: all 0.2s ease;
 }
 
-/* Button Nyekundu ya Record */
 .btn-red-primary {
     flex: 1;
     background: linear-gradient(135deg, #dc2626, #b91c1c);
@@ -399,7 +404,7 @@ body {
     justify-content: space-between;
     font-size: 10px;
     color: #64748b;
-    border-top: 1px border rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding-top: 10px;
 }
 

@@ -10,6 +10,7 @@
 
 <div class="app-container">
 
+    <!-- Top Header -->
     <div class="header">
         <div class="logo">
             <div class="logo-icon">🎙️</div>
@@ -19,23 +20,25 @@
             </div>
         </div>
         <div class="header-actions">
-            <div class="notif-btn">🔔 <span class="notif-badge">3</span></div>
+            <div class="notif-btn">🔔 <span class="notif-badge">7</span></div>
             <div class="profile-avatar">👤</div>
         </div>
     </div>
 
+    <!-- Main Dashboard Card -->
     <div class="dashboard-card">
         <div class="dash-header">
-            <span class="dash-label">Available Balance</span>
+            <span class="dash-label">SALIO LAKO</span>
             <span class="level-badge">⭐ Level 3</span>
         </div>
         <div class="balance-amount" id="salio-txt">TZS 0</div>
-        <div class="today-earnings" id="today-earning-txt">+ TZS 0 today</div>
-        <button class="btn-withdraw">💳 Withdraw</button>
+        <div class="today-earnings" id="today-earning-txt">+ TZS 0 LEO</div>
+        <button class="btn-withdraw">💳 TOA PESA</button>
 
         <div class="mic-graphic">🎙️</div>
     </div>
 
+    <!-- Stats Grid -->
     <div class="stats-grid">
         <div class="stat-card">
             <span class="stat-icon">📊</span>
@@ -49,7 +52,7 @@
         </div>
         <div class="stat-card">
             <span class="stat-icon">⏱️</span>
-            <strong id="stat-pending">3</strong>
+            <strong id="stat-pending">7</strong>
             <span>Pending Tasks</span>
         </div>
         <div class="stat-card">
@@ -59,17 +62,20 @@
         </div>
     </div>
 
+    <!-- Section Header -->
     <div class="section-header">
-        <h3>Available Voice Tasks</h3>
-        <span class="see-all">See all ›</span>
+        <h3>Our Suppliers & Tasks</h3>
+        <span class="see-all">See all (7) ›</span>
     </div>
 
+    <!-- TASK LIST SECTION -->
     <div class="tasks-container">
 
+        <!-- SUPPLIER 1: MAX STORE -->
         <div class="task-card">
             <div class="supplier-row">
                 <div class="supplier-left">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Alibaba_Group_logo.svg/512px-Alibaba_Group_logo.svg.png" alt="Alibaba" class="brand-img">
+                    <div class="brand-img logo-max">MAX</div>
                     <div>
                         <div class="supplier-name">@max_store <span class="verify-check">✓</span></div>
                         <span class="store-tag">Alibaba Supplier</span>
@@ -79,7 +85,7 @@
             </div>
 
             <div class="message-bubble">
-                "Mzigo wako wa vifaa vya michezo kutoka Alibaba umewasili. Tafadhali thibitisha anwani yako ya kutolea mzigo ili tuweze kukukabidhi."
+                "Mzigo wako wa vifaa vya michezo kutoka Alibaba umewasili. Tafadhali thibitisha anwani yako ya kutolea mzigo."
             </div>
 
             <div class="rec-instruction">
@@ -106,15 +112,16 @@
 
             <div class="card-footer-info">
                 <span>Payment: <strong>TZS 12,500</strong></span>
-                <span>Est. time: <strong>~ 2 min</strong></span>
+                <span>Est. time: <strong>less than 2 min</strong></span>
                 <span class="verified-txt">Supplier Verified ✓</span>
             </div>
         </div>
 
+        <!-- SUPPLIER 2: AGGY ELECTRONICS -->
         <div class="task-card">
             <div class="supplier-row">
                 <div class="supplier-left">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Temu_logo.svg/512px-Temu_logo.svg.png" alt="Temu" class="brand-img">
+                    <div class="brand-img logo-aggy">⚡</div>
                     <div>
                         <div class="supplier-name">@aggy electronics <span class="verify-check">✓</span></div>
                         <span class="store-tag">Temu Supplier</span>
@@ -151,17 +158,18 @@
 
             <div class="card-footer-info">
                 <span>Payment: <strong>TZS 8,400</strong></span>
-                <span>Est. time: <strong>~ 2 min</strong></span>
+                <span>Est. time: <strong>less than 2 min</strong></span>
                 <span class="verified-txt">Supplier Verified ✓</span>
             </div>
         </div>
 
+        <!-- SUPPLIER 3: BREEZE FASHION -->
         <div class="task-card">
             <div class="supplier-row">
                 <div class="supplier-left">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" class="brand-img amazon-fix">
+                    <div class="brand-img logo-breeze">👗</div>
                     <div>
-                        <div class="supplier-name">@brizzy fashion <span class="verify-check">✓</span></div>
+                        <div class="supplier-name">@breeze fashion <span class="verify-check">✓</span></div>
                         <span class="store-tag">Amazon Supplier</span>
                     </div>
                 </div>
@@ -190,19 +198,204 @@
                 </button>
             </div>
 
-            <button class="btn btn-send-full" id="sendBtn-3" onclick="handleSendAction(3, 'Kelvin', 'TZS 14,800', '@brizzy fashion')">
+            <button class="btn btn-send-full" id="sendBtn-3" onclick="handleSendAction(3, 'Kelvin', 'TZS 14,800', '@breeze fashion')">
                 📤 Send Response to Customer
             </button>
 
             <div class="card-footer-info">
                 <span>Payment: <strong>TZS 14,800</strong></span>
-                <span>Est. time: <strong>~ 2 min</strong></span>
+                <span>Est. time: <strong>less than 2 min</strong></span>
+                <span class="verified-txt">Supplier Verified ✓</span>
+            </div>
+        </div>
+
+        <!-- SUPPLIER 4: KIKUU MALL -->
+        <div class="task-card">
+            <div class="supplier-row">
+                <div class="supplier-left">
+                    <div class="brand-img logo-kikuu">K</div>
+                    <div>
+                        <div class="supplier-name">@kikuu_official <span class="verify-check">✓</span></div>
+                        <span class="store-tag">Kikuu Express</span>
+                    </div>
+                </div>
+                <div class="price-badge">TZS 9,600</div>
+            </div>
+
+            <div class="message-bubble">
+                "Oda yako ya viatu vipya imethibitishwa. Sauti yako inahitajika kuthibitisha eneo la kuwasilisha."
+            </div>
+
+            <div class="rec-instruction">
+                <span>🎙️ Record your voice response</span>
+                <span class="time-est">01:45</span>
+            </div>
+
+            <div class="visualizer-container" id="visualizer-box-4">
+                <canvas id="visualizer-4"></canvas>
+            </div>
+
+            <div class="action-row">
+                <button class="btn btn-red-primary" id="mainActionBtn-4" onclick="handleMainAction(4, 'Sarah')">
+                    🎙️ Record Voice
+                </button>
+                <button class="btn btn-play-circle" id="playBtn-4" onclick="playAudio(4)">
+                    ▶️
+                </button>
+            </div>
+
+            <button class="btn btn-send-full" id="sendBtn-4" onclick="handleSendAction(4, 'Sarah', 'TZS 9,600', '@kikuu_official')">
+                📤 Send Response to Customer
+            </button>
+
+            <div class="card-footer-info">
+                <span>Payment: <strong>TZS 9,600</strong></span>
+                <span>Est. time: <strong>less than 2 min</strong></span>
+                <span class="verified-txt">Supplier Verified ✓</span>
+            </div>
+        </div>
+
+        <!-- SUPPLIER 5: SHOPEE GLOBAL -->
+        <div class="task-card">
+            <div class="supplier-row">
+                <div class="supplier-left">
+                    <div class="brand-img logo-shopee">🛍️</div>
+                    <div>
+                        <div class="supplier-name">@shopee_global <span class="verify-check">✓</span></div>
+                        <span class="store-tag">Shopee Direct</span>
+                    </div>
+                </div>
+                <div class="price-badge">TZS 11,000</div>
+            </div>
+
+            <div class="message-bubble">
+                "Tafadhali kamilisha uthibitisho wa sauti ili kuwezesha mzigo wako wa kamera kuondoka bandarini."
+            </div>
+
+            <div class="rec-instruction">
+                <span>🎙️ Record your voice response</span>
+                <span class="time-est">01:50</span>
+            </div>
+
+            <div class="visualizer-container" id="visualizer-box-5">
+                <canvas id="visualizer-5"></canvas>
+            </div>
+
+            <div class="action-row">
+                <button class="btn btn-red-primary" id="mainActionBtn-5" onclick="handleMainAction(5, 'John')">
+                    🎙️ Record Voice
+                </button>
+                <button class="btn btn-play-circle" id="playBtn-5" onclick="playAudio(5)">
+                    ▶️
+                </button>
+            </div>
+
+            <button class="btn btn-send-full" id="sendBtn-5" onclick="handleSendAction(5, 'John', 'TZS 11,000', '@shopee_global')">
+                📤 Send Response to Customer
+            </button>
+
+            <div class="card-footer-info">
+                <span>Payment: <strong>TZS 11,000</strong></span>
+                <span>Est. time: <strong>less than 2 min</strong></span>
+                <span class="verified-txt">Supplier Verified ✓</span>
+            </div>
+        </div>
+
+        <!-- SUPPLIER 6: TRENDYOL STORE -->
+        <div class="task-card">
+            <div class="supplier-row">
+                <div class="supplier-left">
+                    <div class="brand-img logo-trendyol">T</div>
+                    <div>
+                        <div class="supplier-name">@trendyol_fashion <span class="verify-check">✓</span></div>
+                        <span class="store-tag">Turkey Brand</span>
+                    </div>
+                </div>
+                <div class="price-badge">TZS 16,500</div>
+            </div>
+
+            <div class="message-bubble">
+                "Mzigo wa nguo za watoto kutoka Uturuki umefika darajani. Rekodi ujumbe mfupi wa kuridhia kupelekwa nyumbani."
+            </div>
+
+            <div class="rec-instruction">
+                <span>🎙️ Record your voice response</span>
+                <span class="time-est">02:10</span>
+            </div>
+
+            <div class="visualizer-container" id="visualizer-box-6">
+                <canvas id="visualizer-6"></canvas>
+            </div>
+
+            <div class="action-row">
+                <button class="btn btn-red-primary" id="mainActionBtn-6" onclick="handleMainAction(6, 'Amina')">
+                    🎙️ Record Voice
+                </button>
+                <button class="btn btn-play-circle" id="playBtn-6" onclick="playAudio(6)">
+                    ▶️
+                </button>
+            </div>
+
+            <button class="btn btn-send-full" id="sendBtn-6" onclick="handleSendAction(6, 'Amina', 'TZS 16,500', '@trendyol_fashion')">
+                📤 Send Response to Customer
+            </button>
+
+            <div class="card-footer-info">
+                <span>Payment: <strong>TZS 16,500</strong></span>
+                <span>Est. time: <strong>less than 2 min</strong></span>
+                <span class="verified-txt">Supplier Verified ✓</span>
+            </div>
+        </div>
+
+        <!-- SUPPLIER 7: FASTEXPRESS LOGISTICS -->
+        <div class="task-card">
+            <div class="supplier-row">
+                <div class="supplier-left">
+                    <div class="brand-img logo-fastexpress">🚚</div>
+                    <div>
+                        <div class="supplier-name">@fast_express <span class="verify-check">✓</span></div>
+                        <span class="store-tag">Air Cargo Logistics</span>
+                    </div>
+                </div>
+                <div class="price-badge">TZS 10,200</div>
+            </div>
+
+            <div class="message-bubble">
+                "Kifurushi chako kipo kwenye gari la usambazaji. Tafadhali jibu kwa sauti kuthibitisha mpokeaji."
+            </div>
+
+            <div class="rec-instruction">
+                <span>🎙️ Record your voice response</span>
+                <span class="time-est">01:30</span>
+            </div>
+
+            <div class="visualizer-container" id="visualizer-box-7">
+                <canvas id="visualizer-7"></canvas>
+            </div>
+
+            <div class="action-row">
+                <button class="btn btn-red-primary" id="mainActionBtn-7" onclick="handleMainAction(7, 'David')">
+                    🎙️ Record Voice
+                </button>
+                <button class="btn btn-play-circle" id="playBtn-7" onclick="playAudio(7)">
+                    ▶️
+                </button>
+            </div>
+
+            <button class="btn btn-send-full" id="sendBtn-7" onclick="handleSendAction(7, 'David', 'TZS 10,200', '@fast_express')">
+                📤 Send Response to Customer
+            </button>
+
+            <div class="card-footer-info">
+                <span>Payment: <strong>TZS 10,200</strong></span>
+                <span>Est. time: <strong>less than 2 min</strong></span>
                 <span class="verified-txt">Supplier Verified ✓</span>
             </div>
         </div>
 
     </div>
 
+    <!-- Bottom Navigation Bar -->
     <div class="bottom-nav">
         <div class="nav-item active">
             <span class="nav-icon">🏠</span>
@@ -227,6 +420,7 @@
 
 </div>
 
+<!-- POPUP MODAL YA MALIPO -->
 <div class="modal-overlay" id="paymentModal">
     <div class="modal-card">
         <div class="modal-icon">🎉</div>
