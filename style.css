@@ -152,60 +152,84 @@ body {
     font-weight: 600;
 }
 
+/* Row for TOA PESA and CUSTOMER CARE buttons */
+.dash-buttons-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
 .btn-withdraw {
-    background: #3b82f6;
+    flex: 1;
+    background: #00b4d8;
     color: white;
     border: none;
-    padding: 10px 18px;
-    border-radius: 12px;
-    font-weight: 700;
+    padding: 12px 14px;
+    border-radius: 14px;
+    font-weight: 800;
     font-size: 13px;
     cursor: pointer;
-    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.4);
+    box-shadow: 0 4px 14px rgba(0, 180, 216, 0.4);
+    text-transform: uppercase;
+}
+
+.btn-customer-care {
+    flex: 1.2;
+    background: linear-gradient(135deg, #0d9488, #115e59);
+    color: #ffffff;
+    border: 1px solid rgba(45, 212, 191, 0.3);
+    padding: 12px 12px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(13, 148, 136, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: transform 0.2s;
+}
+
+.btn-customer-care:active {
+    transform: scale(0.98);
 }
 
 .mic-graphic {
     position: absolute;
-    right: 15px;
-    bottom: 10px;
-    font-size: 85px;
-    opacity: 0.25;
+    right: 10px;
+    bottom: -15px;
+    font-size: 90px;
+    opacity: 0.18;
     pointer-events: none;
 }
 
-/* Stats Grid */
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+/* Single Button Section Replacing Stats Grid */
+.account-active-section {
     margin-bottom: 22px;
 }
 
-.stat-card {
-    background: #111a2e;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    padding: 12px 6px;
-    text-align: center;
-}
-
-.stat-icon {
-    font-size: 14px;
-    display: block;
-    margin-bottom: 4px;
-}
-
-.stat-card strong {
-    display: block;
-    font-size: 13px;
+.btn-account-active {
+    width: 100%;
+    background: linear-gradient(135deg, #00b4d8, #0077b6);
     color: #ffffff;
+    border: 1px solid rgba(0, 180, 216, 0.5);
+    padding: 16px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0, 180, 216, 0.35);
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 
-.stat-card span {
-    font-size: 9px;
-    color: #64748b;
-    display: block;
-    margin-top: 2px;
+.btn-account-active:active {
+    transform: scale(0.98);
 }
 
 /* Section Header */
@@ -249,7 +273,7 @@ body {
     gap: 10px;
 }
 
-/* High-Quality Custom Brand Badges */
+/* Custom Brand Badges */
 .brand-img {
     width: 42px;
     height: 42px;

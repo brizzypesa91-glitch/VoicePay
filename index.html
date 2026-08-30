@@ -25,6 +25,80 @@
         </div>
     </div>
 
+    <!-- Sehemu ya Juu - Voice Pay Banner Card -->
+<div class="voicepay-card">
+  <div class="badge">🎙️ Voice Pay Welcome</div>
+  <h2>Karibu Voice Pay!</h2>
+  <p class="description">
+    Hapa unasoma message kutoka kwa suppliers, kisha unarecord voice na kutuma moja kwa moja kwa wateja wao ili uweze kulipwa!
+  </p>
+
+
+<style>
+  /* Styling ya Kadi ya Voice Pay */
+  .voicepay-card {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #ffffff;
+    padding: 28px 24px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 600px;
+    margin: 15px auto;
+    text-align: center;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .voicepay-card .badge {
+    display: inline-block;
+    background-color: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    margin-bottom: 12px;
+  }
+
+  .voicepay-card h2 {
+    margin: 5px 0 12px 0;
+    font-size: 1.8rem;
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  .voicepay-card .description {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #cbd5e1;
+    margin-bottom: 22px;
+  }
+
+  .voicepay-card .steps-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .voicepay-card .step-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: #f1f5f9;
+    font-weight: 500;
+  }
+
+  .voicepay-card .step-icon {
+    font-size: 1.1rem;
+  }
+</style>
+
     <!-- Main Dashboard Card -->
     <div class="dashboard-card">
         <div class="dash-header">
@@ -33,33 +107,21 @@
         </div>
         <div class="balance-amount" id="salio-txt">TZS 0</div>
         <div class="today-earnings" id="today-earning-txt">+ TZS 0 LEO</div>
-        <button class="btn-withdraw">💳 TOA PESA</button>
+        
+        <!-- Action Row inside Dashboard Card -->
+        <div class="dash-buttons-row">
+            <button class="btn-withdraw">💳 TOA PESA</button>
+            <button class="btn-customer-care" onclick="alert('Inakuunganisha na Customer Care...')">🎧 Wasiliana na Customer Care</button>
+        </div>
 
         <div class="mic-graphic">🎙️</div>
     </div>
 
-    <!-- Stats Grid -->
-    <div class="stats-grid">
-        <div class="stat-card">
-            <span class="stat-icon">📊</span>
-            <strong id="stat-voices">0</strong>
-            <span>Voices Recorded</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-icon">👛</span>
-            <strong id="stat-earned">TZS 0</strong>
-            <span>Total Earned</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-icon">⏱️</span>
-            <strong id="stat-pending">7</strong>
-            <span>Pending Tasks</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-icon">📈</span>
-            <strong>100%</strong>
-            <span>Approval Rate</span>
-        </div>
+    <!-- Single Large Button replacing Stats Grid -->
+    <div class="account-active-section">
+        <button class="btn-account-active" onclick="alert('Inafungua mchakato wa ku-activate account...')">
+             Fungua Account Active Hapa
+        </button>
     </div>
 
     <!-- Section Header -->
