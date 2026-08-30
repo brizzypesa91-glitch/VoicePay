@@ -552,3 +552,44 @@ canvas { width: 100%; height: 100%; }
     50% { opacity: 0.75; }
     100% { opacity: 1; }
 }
+
+/* Container inayoshikilia button zote mbili */
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px; /* Nafasi kati ya button na button */
+  width: 100%;
+}
+
+/* Style ya Pamoja kwa Button ZOTE MBILI */
+.action-btn {
+  flex: 1; /* Hii inafanya button zote ziwe na UPANA Sawa kabisa (50% kwa 50%) */
+  height: 54px; /* Unene/kimo sawa kwa zote mbili */
+  
+  /* Rangi ya Blueberry (#1d4ed8 / #2563eb au dark blueberry #1e3a8a) */
+  background: linear-gradient(135deg, #1d93d8 0%, #0cbbe7 100%);
+  color: #ffffff;
+  
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  
+  /* Mpangilio wa Maandishi na Icon ndani ya Button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 0 8px;
+  box-shadow: 0 4px 12px rgba(29, 151, 216, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect ukibonyeza au kupitisha cursor */
+.action-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
