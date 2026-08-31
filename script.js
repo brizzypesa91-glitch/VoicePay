@@ -102,7 +102,7 @@ function renderSuppliers() {
   });
 }
 
-// RECORDING LOGIC
+// RECORDING LOGIC WITH WORKING AUDIO BLOB PLAYBACK
 async function handleRecordClick(id) {
   const btnRec = document.getElementById(`btn-rec-${id}`);
   const timerSpan = document.getElementById(`timer-${id}`);
@@ -120,16 +120,27 @@ async function handleRecordClick(id) {
       state.chunks = [];
 
       state.mediaRecorder.ondataavailable = e => {
-        if (e.data.size > 0) state.chunks.push(e.data);
+        if (e.data && e.data.size > 0) {
+          state.chunks.push(e.data);
+        }
       };
 
       state.mediaRecorder.onstop = () => {
         const audioBlob = new Blob(state.chunks, { type: 'audio/webm' });
         const audioUrl = URL.createObjectURL(audioBlob);
+        
+        // Hapa tunatengeneza Audio Player halisi kutoka kwenye sauti iliyorekodiwa
         state.audioObj = new Audio(audioUrl);
 
         const btnSend = document.getElementById(`btn-send-${id}`);
         btnSend.classList.add('ready');
+
+        // Geuza rangi ya Play button kuonyesha kwamba ipo tayari kuchezwa
+        const btnPlay = document.getElementById(`btn-play-${id}`);
+        if (btnPlay) {
+          btnPlay.style.borderColor = '#22c55e';
+          btnPlay.style.color = '#22c55e';
+        }
       };
 
       state.mediaRecorder.start();
@@ -150,8 +161,10 @@ async function handleRecordClick(id) {
       alert("Tafadhali ruhusu Kinasa Sauti (Microphone) kwenye kivinjari chako ili kurekodi!");
     }
   } else {
-    state.mediaRecorder.stop();
-    state.mediaRecorder.stream.getTracks().forEach(track => track.stop());
+    if (state.mediaRecorder && state.mediaRecorder.state !== 'inactive') {
+      state.mediaRecorder.stop();
+      state.mediaRecorder.stream.getTracks().forEach(track => track.stop());
+    }
     state.recording = false;
     clearInterval(state.timerInterval);
 
@@ -161,13 +174,18 @@ async function handleRecordClick(id) {
   }
 }
 
-// PLAYBACK LOGIC
+// PLAYBACK LOGIC - PLAYS ACTUAL RECORDED VOICE
 function playAudio(id) {
   const state = audioStore[id];
   if (state && state.audioObj) {
-    state.audioObj.play();
+    // Rejesha audio kuanzia mwanzo ikiwa ilishapigwa awali
+    state.audioObj.currentTime = 0;
+    state.audioObj.play().catch(err => {
+      console.error("Audio playback error:", err);
+      alert("Kuna shida kurejesha sauti, tafadhali jaribu kurekodi tena.");
+    });
   } else {
-    alert("Hujarekodi sauti bado! Bonyeza 'Record Voice' kwanza, ukimaliza ndipo ubonyeze hapa kuisikiliza.");
+    alert("Hujarekodi sauti bado! Bonyeza 'Record Voice' kwanza, ukimaliza kurekodi ndipo ubonyeze Play kuisikia sauti yako.");
   }
 }
 
