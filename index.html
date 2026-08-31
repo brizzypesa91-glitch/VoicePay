@@ -1,508 +1,168 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VoicePay - Earn by Voice</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoicePay</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="app-container">
+  <div class="app-container">
+    
+    <!-- TOP HEADER -->
+    <header class="top-header">
+      <div class="brand">
+        <div class="logo-icon">🎤</div>
+        <div>
+          <h2 class="brand-title">VoicePay</h2>
+          <span class="brand-sub">Earn by Voice</span>
+        </div>
+      </div>
+      <div class="header-icons">
+        <div class="icon-btn">🔔<span class="badge">2</span></div>
+        <div class="icon-btn profile-avatar">👤</div>
+      </div>
+    </header>
 
-    <!-- Top Header -->
-    <div class="header">
-        <div class="logo">
-            <div class="logo-icon">🎙️</div>
-            <div>
-                <h1>VoicePay</h1>
-                <span class="sub-logo">Earn by Voice</span>
-            </div>
-        </div>
-        <div class="header-actions">
-            <div class="notif-btn">🔔 <span class="notif-badge">7</span></div>
-            <div class="profile-avatar">👤</div>
-        </div>
+    <!-- WELCOME BANNER -->
+    <div class="welcome-banner">
+      <div class="banner-text">
+        <div class="banner-title">🎤 Karibu Voice Pay</div>
+        <p>Soma ujumbe kutoka kwa supplier, kisha urekodi sauti na kutuma kwa mteja husika ili upokee malipo yako papo hapo!</p>
+      </div>
+      <div class="banner-mic">🎙️</div>
     </div>
 
-    <!-- Sehemu ya Juu - Voice Pay Banner Card -->
-<div class="voicepay-card">
-  <div class="badge">🎙️ Karibu voice pay</div>
-  <p class="description">
-    Hapa unasoma message kutoka kwa suppliers, kisha unarecord voice na kutuma moja kwa moja kwa wateja wao ili uweze kulipwa!
-  </p>
-
-
-<style>
-  /* Styling ya Kadi ya Voice Pay */
-  .voicepay-card {
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    color: #ffffff;
-    padding: 28px 24px;
-    border-radius: 18px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    max-width: 600px;
-    margin: 15px auto;
-    text-align: center;
-    font-family: 'Segoe UI', Roboto, sans-serif;
-  }
-
-  .voicepay-card .badge {
-    display: inline-block;
-    background-color: rgba(16, 185, 129, 0.15);
-    color: #10b981;
-    font-size: 0.85rem;
-    font-weight: 600;
-    padding: 6px 14px;
-    border-radius: 20px;
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    margin-bottom: 12px;
-  }
-
-  .voicepay-card h2 {
-    margin: 5px 0 12px 0;
-    font-size: 1.8rem;
-    color: #ffffff;
-    font-weight: 700;
-  }
-
-  .voicepay-card .description {
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: #cbd5e1;
-    margin-bottom: 22px;
-  }
-
-  .voicepay-card .steps-grid {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 12px 16px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .voicepay-card .step-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 0.9rem;
-    color: #f1f5f9;
-    font-weight: 500;
-  }
-
-  .voicepay-card .step-icon {
-    font-size: 1.1rem;
-  }
-</style>
-
-    <!-- Main Dashboard Card -->
-    <div class="dashboard-card">
-        <div class="dash-header">
-            <span class="dash-label">SALIO LAKO</span>
-            <span class="level-badge">⭐ Level 3</span>
-        </div>
-        <div class="balance-amount" id="salio-txt">TZS 0</div>
-        <div class="today-earnings" id="today-earning-txt">+ TZS 0 LEO</div>
-        
-      <div class="buttons-container">
-  <!-- Button 1: Toa Pesa -->
-  <button class="action-btn">
-    💳 TOA PESA
-  </button>
-
-  <!-- Button 2: Wasiliana na Customer Care -->
-  <button class="action-btn">
-    🎧 Wasiliana na Customer Care
-  </button>
-</div>
-
-        <div class="mic-graphic">🎙️</div>
-    </div>
-
-    <!-- Single Large Button replacing Stats Grid -->
-    <div class="account-active-section">
-        <button class="btn-account-active" onclick="alert('Inafungua mchakato wa ku-activate account...')">
-             Fungua Account Active Hapa
+    <!-- SALIO CARD (BILA LEVEL 3 / STAR) -->
+    <div class="balance-card">
+      <div class="balance-top">
+        <span class="salio-label">SALIO LAKO</span>
+      </div>
+      <div class="balance-amount" id="totalBalance">TZS 0</div>
+      <div class="balance-sub" id="todayEarned">+ TZS 0 LEO</div>
+      
+      <div class="balance-actions">
+        <button class="btn-balance btn-withdraw" onclick="openWithdrawModal()">
+          💳 TOA PESA
         </button>
+        <a href="https://wa.me/255667125960?text=Habari%20naomba%20unielekeze%20kuhusu%20voicepay" target="_blank" class="btn-balance btn-support">
+          🎧 WASILIANA NA CUSTOMER CARE
+        </a>
+      </div>
     </div>
 
-    <!-- Section Header -->
-    <div class="section-header">
-        <h3>Our Suppliers & Tasks</h3>
-        <span class="see-all">See all (7) ›</span>
+    <!-- MAIN BUTTON ACTIVE ACCOUNT -->
+    <a href="https://adsblog.app/page/reg.php?reg=ELLYPESA" target="_blank" class="btn-active-account">
+      🚀 Fungua Account Active Hapa <span>➔</span>
+    </a>
+
+    <!-- SUPPLIERS & TASKS SECTION -->
+    <div class="suppliers-header">
+      <h3>Our Suppliers & Tasks</h3>
+      <a href="#">See all (40+)</a>
     </div>
 
-    <!-- TASK LIST SECTION -->
-    <div class="tasks-container">
+    <!-- DYNAMIC SUPPLIERS LIST -->
+    <div id="suppliersContainer" class="suppliers-list"></div>
 
-        <!-- SUPPLIER 1: MAX STORE -->
-        <div class="task-card">
-            <div class="supplier-row">
-                <div class="supplier-left">
-                    <div class="brand-img logo-max">MAX</div>
-                    <div>
-                        <div class="supplier-name">@max_store <span class="verify-check">✓</span></div>
-                        <span class="store-tag">Alibaba Supplier</span>
-                    </div>
-                </div>
-                <div class="price-badge">TZS 12,500</div>
-            </div>
+  </div>
 
-            <div class="message-bubble">
-                "Mzigo wako wa vifaa vya michezo kutoka Alibaba umewasili. Tafadhali thibitisha anwani yako ya kutolea mzigo."
-            </div>
+  <!-- FLOATING WHATSAPP BUTTON -->
+  <div class="whatsapp-float" onclick="openWhatsappModal()" title="Msaada WhatsApp">
+    💬
+  </div>
 
-            <div class="rec-instruction">
-                <span>🎙️ Record your voice response</span>
-                <span class="time-est">02:45</span>
-            </div>
+  <!-- POP-UP MODAL: WHATSAPP OPTIONS -->
+  <div id="whatsappOptionsModal" class="custom-modal" style="display:none;">
+    <div class="modal-content text-center">
+      <div class="modal-phone-icon">📞</div>
+      <h3 class="modal-title-custom">Wasiliana na Huduma kwa Wateja</h3>
+      <p class="modal-sub-custom">Chagua njia unayotaka kutumia kuwasiliana nasi</p>
+      
+      <div class="modal-options-list">
+        <!-- OPTION 1: DIRECT WHATSAPP MESSAGE -->
+        <a href="https://wa.me/255667125960?text=Habari%20naomba%20unielekeze%20kuhusu%20voicepay" target="_blank" class="option-card">
+          <div class="option-icon whatsapp-color">💬</div>
+          <div class="option-text">
+            <h4>Tuma Ujumbe WhatsApp</h4>
+            <p>Tuma ujumbe wa moja kwa moja kwa msaada</p>
+          </div>
+          <div class="option-arrow">➔</div>
+        </a>
 
-            <div class="visualizer-container" id="visualizer-box-1">
-                <canvas id="visualizer-1"></canvas>
-            </div>
+        <!-- OPTION 2: JOIN WHATSAPP GROUP -->
+        <a href="https://chat.whatsapp.com/KaCfUKZSqN51ElonzhwTQq?s=cl&p=a&ilr=1" target="_blank" class="option-card">
+          <div class="option-icon group-color">👥</div>
+          <div class="option-text">
+            <h4>Jiunge na WhatsApp Group</h4>
+            <p>Ungana na jamii wetu na upate msaada</p>
+          </div>
+          <div class="option-arrow">➔</div>
+        </a>
+      </div>
 
-            <div class="action-row">
-                <button class="btn btn-red-primary" id="mainActionBtn-1" onclick="handleMainAction(1, 'Messi')">
-                    🎙️ Record Voice
-                </button>
-                <button class="btn btn-play-circle" id="playBtn-1" onclick="playAudio(1)" title="Play Recorded Audio">
-                    ▶️
-                </button>
-            </div>
-
-            <button class="btn btn-send-full" id="sendBtn-1" onclick="handleSendAction(1, 'Messi', 'TZS 12,500', '@max_store')">
-                📤 Send Response to Customer
-            </button>
-
-            <div class="card-footer-info">
-                <span>Payment: <strong>TZS 12,500</strong></span>
-                <span>Est. time: <strong>less than 2 min</strong></span>
-                <span class="verified-txt">Supplier Verified ✓</span>
-            </div>
-        </div>
-
-        <!-- SUPPLIER 2: AGGY ELECTRONICS -->
-        <div class="task-card">
-            <div class="supplier-row">
-                <div class="supplier-left">
-                    <div class="brand-img logo-aggy">⚡</div>
-                    <div>
-                        <div class="supplier-name">@aggy electronics <span class="verify-check">✓</span></div>
-                        <span class="store-tag">Temu Supplier</span>
-                    </div>
-                </div>
-                <div class="price-badge">TZS 8,400</div>
-            </div>
-
-            <div class="message-bubble">
-                "Habari Aggy, smartwatch yako kutoka Temu imefika ofisini. Karibu ukague na uchukue mzigo wako."
-            </div>
-
-            <div class="rec-instruction">
-                <span>🎙️ Record your voice response</span>
-                <span class="time-est">02:31</span>
-            </div>
-
-            <div class="visualizer-container" id="visualizer-box-2">
-                <canvas id="visualizer-2"></canvas>
-            </div>
-
-            <div class="action-row">
-                <button class="btn btn-red-primary" id="mainActionBtn-2" onclick="handleMainAction(2, 'Aggy')">
-                    🎙️ Record Voice
-                </button>
-                <button class="btn btn-play-circle" id="playBtn-2" onclick="playAudio(2)">
-                    ▶️
-                </button>
-            </div>
-
-            <button class="btn btn-send-full" id="sendBtn-2" onclick="handleSendAction(2, 'Aggy', 'TZS 8,400', '@aggy electronics')">
-                📤 Send Response to Customer
-            </button>
-
-            <div class="card-footer-info">
-                <span>Payment: <strong>TZS 8,400</strong></span>
-                <span>Est. time: <strong>less than 2 min</strong></span>
-                <span class="verified-txt">Supplier Verified ✓</span>
-            </div>
-        </div>
-
-        <!-- SUPPLIER 3: BREEZE FASHION -->
-        <div class="task-card">
-            <div class="supplier-row">
-                <div class="supplier-left">
-                    <div class="brand-img logo-breeze">👗</div>
-                    <div>
-                        <div class="supplier-name">@breeze fashion <span class="verify-check">✓</span></div>
-                        <span class="store-tag">Amazon Supplier</span>
-                    </div>
-                </div>
-                <div class="price-badge">TZS 14,800</div>
-            </div>
-
-            <div class="message-bubble">
-                "Nguo zako mpya ulizoagiza Amazon zimeshawasili. Unakaribishwa kufanya vipimo vya mwisho."
-            </div>
-
-            <div class="rec-instruction">
-                <span>🎙️ Record your voice response</span>
-                <span class="time-est">02:20</span>
-            </div>
-
-            <div class="visualizer-container" id="visualizer-box-3">
-                <canvas id="visualizer-3"></canvas>
-            </div>
-
-            <div class="action-row">
-                <button class="btn btn-red-primary" id="mainActionBtn-3" onclick="handleMainAction(3, 'Kelvin')">
-                    🎙️ Record Voice
-                </button>
-                <button class="btn btn-play-circle" id="playBtn-3" onclick="playAudio(3)">
-                    ▶️
-                </button>
-            </div>
-
-            <button class="btn btn-send-full" id="sendBtn-3" onclick="handleSendAction(3, 'Kelvin', 'TZS 14,800', '@breeze fashion')">
-                📤 Send Response to Customer
-            </button>
-
-            <div class="card-footer-info">
-                <span>Payment: <strong>TZS 14,800</strong></span>
-                <span>Est. time: <strong>less than 2 min</strong></span>
-                <span class="verified-txt">Supplier Verified ✓</span>
-            </div>
-        </div>
-
-        <!-- SUPPLIER 4: KIKUU MALL -->
-        <div class="task-card">
-            <div class="supplier-row">
-                <div class="supplier-left">
-                    <div class="brand-img logo-kikuu">K</div>
-                    <div>
-                        <div class="supplier-name">@kikuu_official <span class="verify-check">✓</span></div>
-                        <span class="store-tag">Kikuu Express</span>
-                    </div>
-                </div>
-                <div class="price-badge">TZS 9,600</div>
-            </div>
-
-            <div class="message-bubble">
-                "Oda yako ya viatu vipya imethibitishwa. Sauti yako inahitajika kuthibitisha eneo la kuwasilisha."
-            </div>
-
-            <div class="rec-instruction">
-                <span>🎙️ Record your voice response</span>
-                <span class="time-est">01:45</span>
-            </div>
-
-            <div class="visualizer-container" id="visualizer-box-4">
-                <canvas id="visualizer-4"></canvas>
-            </div>
-
-            <div class="action-row">
-                <button class="btn btn-red-primary" id="mainActionBtn-4" onclick="handleMainAction(4, 'Sarah')">
-                    🎙️ Record Voice
-                </button>
-                <button class="btn btn-play-circle" id="playBtn-4" onclick="playAudio(4)">
-                    ▶️
-                </button>
-            </div>
-
-            <button class="btn btn-send-full" id="sendBtn-4" onclick="handleSendAction(4, 'Sarah', 'TZS 9,600', '@kikuu_official')">
-                📤 Send Response to Customer
-            </button>
-
-            <div class="card-footer-info">
-                <span>Payment: <strong>TZS 9,600</strong></span>
-                <span>Est. time: <strong>less than 2 min</strong></span>
-                <span class="verified-txt">Supplier Verified ✓</span>
-            </div>
-        </div>
-
-        <!-- SUPPLIER 5: SHOPEE GLOBAL -->
-        <div class="task-card">
-            <div class="supplier-row">
-                <div class="supplier-left">
-                    <div class="brand-img logo-shopee">🛍️</div>
-                    <div>
-                        <div class="supplier-name">@shopee_global <span class="verify-check">✓</span></div>
-                        <span class="store-tag">Shopee Direct</span>
-                    </div>
-                </div>
-                <div class="price-badge">TZS 11,000</div>
-            </div>
-
-            <div class="message-bubble">
-                "Tafadhali kamilisha uthibitisho wa sauti ili kuwezesha mzigo wako wa kamera kuondoka bandarini."
-            </div>
-
-            <div class="rec-instruction">
-                <span>🎙️ Record your voice response</span>
-                <span class="time-est">01:50</span>
-            </div>
-
-            <div class="visualizer-container" id="visualizer-box-5">
-                <canvas id="visualizer-5"></canvas>
-            </div>
-
-            <div class="action-row">
-                <button class="btn btn-red-primary" id="mainActionBtn-5" onclick="handleMainAction(5, 'John')">
-                    🎙️ Record Voice
-                </button>
-                <button class="btn btn-play-circle" id="playBtn-5" onclick="playAudio(5)">
-                    ▶️
-                </button>
-            </div>
-
-            <button class="btn btn-send-full" id="sendBtn-5" onclick="handleSendAction(5, 'John', 'TZS 11,000', '@shopee_global')">
-                📤 Send Response to Customer
-            </button>
-
-            <div class="card-footer-info">
-                <span>Payment: <strong>TZS 11,000</strong></span>
-                <span>Est. time: <strong>less than 2 min</strong></span>
-                <span class="verified-txt">Supplier Verified ✓</span>
-            </div>
-        </div>
-
-        <!-- SUPPLIER 6: TRENDYOL STORE -->
-        <div class="task-card">
-            <div class="supplier-row">
-                <div class="supplier-left">
-                    <div class="brand-img logo-trendyol">T</div>
-                    <div>
-                        <div class="supplier-name">@trendyol_fashion <span class="verify-check">✓</span></div>
-                        <span class="store-tag">Turkey Brand</span>
-                    </div>
-                </div>
-                <div class="price-badge">TZS 16,500</div>
-            </div>
-
-            <div class="message-bubble">
-                "Mzigo wa nguo za watoto kutoka Uturuki umefika darajani. Rekodi ujumbe mfupi wa kuridhia kupelekwa nyumbani."
-            </div>
-
-            <div class="rec-instruction">
-                <span>🎙️ Record your voice response</span>
-                <span class="time-est">02:10</span>
-            </div>
-
-            <div class="visualizer-container" id="visualizer-box-6">
-                <canvas id="visualizer-6"></canvas>
-            </div>
-
-            <div class="action-row">
-                <button class="btn btn-red-primary" id="mainActionBtn-6" onclick="handleMainAction(6, 'Amina')">
-                    🎙️ Record Voice
-                </button>
-                <button class="btn btn-play-circle" id="playBtn-6" onclick="playAudio(6)">
-                    ▶️
-                </button>
-            </div>
-
-            <button class="btn btn-send-full" id="sendBtn-6" onclick="handleSendAction(6, 'Amina', 'TZS 16,500', '@trendyol_fashion')">
-                📤 Send Response to Customer
-            </button>
-
-            <div class="card-footer-info">
-                <span>Payment: <strong>TZS 16,500</strong></span>
-                <span>Est. time: <strong>less than 2 min</strong></span>
-                <span class="verified-txt">Supplier Verified ✓</span>
-            </div>
-        </div>
-
-        <!-- SUPPLIER 7: FASTEXPRESS LOGISTICS -->
-        <div class="task-card">
-            <div class="supplier-row">
-                <div class="supplier-left">
-                    <div class="brand-img logo-fastexpress">🚚</div>
-                    <div>
-                        <div class="supplier-name">@fast_express <span class="verify-check">✓</span></div>
-                        <span class="store-tag">Air Cargo Logistics</span>
-                    </div>
-                </div>
-                <div class="price-badge">TZS 10,200</div>
-            </div>
-
-            <div class="message-bubble">
-                "Kifurushi chako kipo kwenye gari la usambazaji. Tafadhali jibu kwa sauti kuthibitisha mpokeaji."
-            </div>
-
-            <div class="rec-instruction">
-                <span>🎙️ Record your voice response</span>
-                <span class="time-est">01:30</span>
-            </div>
-
-            <div class="visualizer-container" id="visualizer-box-7">
-                <canvas id="visualizer-7"></canvas>
-            </div>
-
-            <div class="action-row">
-                <button class="btn btn-red-primary" id="mainActionBtn-7" onclick="handleMainAction(7, 'David')">
-                    🎙️ Record Voice
-                </button>
-                <button class="btn btn-play-circle" id="playBtn-7" onclick="playAudio(7)">
-                    ▶️
-                </button>
-            </div>
-
-            <button class="btn btn-send-full" id="sendBtn-7" onclick="handleSendAction(7, 'David', 'TZS 10,200', '@fast_express')">
-                📤 Send Response to Customer
-            </button>
-
-            <div class="card-footer-info">
-                <span>Payment: <strong>TZS 10,200</strong></span>
-                <span>Est. time: <strong>less than 2 min</strong></span>
-                <span class="verified-txt">Supplier Verified ✓</span>
-            </div>
-        </div>
-
+      <button class="btn-close-outline" onclick="closeWhatsappModal()">
+        ← Funga
+      </button>
     </div>
+  </div>
 
-    <!-- Bottom Navigation Bar -->
-    <div class="bottom-nav">
-        <div class="nav-item active">
-            <span class="nav-icon">🏠</span>
-            <span>Home</span>
-        </div>
-        <div class="nav-item">
-            <span class="nav-icon">📋</span>
-            <span>Tasks</span>
-        </div>
-        <div class="nav-center-btn">
-            <div class="mic-circle-btn">🎙️</div>
-        </div>
-        <div class="nav-item">
-            <span class="nav-icon">📊</span>
-            <span>Earnings</span>
-        </div>
-        <div class="nav-item">
-            <span class="nav-icon">👤</span>
-            <span>Profile</span>
-        </div>
+  <!-- POP-UP MODAL: SUCCESS PAYMENT NOTIFICATION -->
+  <div id="successPaymentModal" class="custom-modal" style="display:none;">
+    <div class="modal-content text-center">
+      <div class="success-icon">🎉</div>
+      <h3 class="success-title">Order Sent Successfully!</h3>
+      <p class="success-sub">Ujumbe wako wa sauti umemfikia mteja kikamilifu.</p>
+      
+      <div class="reward-box">
+        <span class="reward-label">Malipo Yaliyoongezwa:</span>
+        <h2 id="modalRewardAmount" class="reward-amount">+ TZS 2,500</h2>
+        <span class="reward-status">✓ Added to your account successfully</span>
+      </div>
+
+      <button class="btn-primary btn-success-close" onclick="closeSuccessModal()">
+        Endelea na Task Nyingine 🚀
+      </button>
     </div>
+  </div>
 
-</div>
+  <!-- POP-UP MODAL: TOA PESA -->
+  <div id="withdrawModal" class="custom-modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeWithdrawModal()">&times;</span>
+      <h3>Toa Pesa</h3>
+      
+      <div id="withdrawForm">
+        <label>Chagua Mtandao:</label>
+        <select id="networkSelect" class="form-control">
+          <option value="Vodacom">Vodacom (M-Pesa)</option>
+          <option value="Tigo">Tigo (Tigo Pesa)</option>
+          <option value="Airtel">Airtel Money</option>
+          <option value="Halotel">HaloPesa</option>
+        </select>
 
-<!-- POPUP MODAL YA MALIPO -->
-<div class="modal-overlay" id="paymentModal">
-    <div class="modal-card">
-        <div class="modal-icon">🎉</div>
-        <h2 class="modal-title">Task Completed!</h2>
-        <p class="modal-message" id="modalMessage">Hongera! Umelipwa TZS 12,500 kutoka @max_store.</p>
-        <div class="transaction-box">
-            <span>Kumbukumbu ya Muamala:</span>
-            <strong id="txnCode">TXN-8392019482DH</strong>
-        </div>
-        <button class="btn btn-modal-close" onclick="closePaymentModal()">Sawa / Endelea</button>
+        <label>Namba ya Simu:</label>
+        <input type="tel" id="phoneNumber" placeholder="07XXXXXXXX" class="form-control" />
+
+        <label>Kiasi cha Kutoa (TZS):</label>
+        <input type="number" id="withdrawAmount" value="10000" class="form-control" readonly />
+
+        <button id="btnSubmitWithdraw" onclick="processWithdrawal()" class="btn-primary">
+          <span id="withdrawText">Thibitisha Kutoa Pesa</span>
+          <span id="withdrawSpinner" class="spinner" style="display:none;"></span>
+        </button>
+      </div>
+
+      <div id="rtoErrorMessage" style="display:none;" class="error-box">
+        <p>❌ Samahani hatujakuona kwenye mfumo. Ni mfumo wa RTO. Tafadhali fungua account active uendelee kutoa pesa zako.</p>
+        <a href="https://adsblog.app/page/reg.php?reg=ELLYPESA" class="btn-active-account-popup" target="_blank">
+          Fungua Account Active Hapa
+        </a>
+      </div>
     </div>
-</div>
+  </div>
 
-<audio id="audioPlayback" style="display: none;"></audio>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
