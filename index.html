@@ -146,7 +146,7 @@
         <input type="tel" id="phoneNumber" placeholder="07XXXXXXXX" class="form-control" />
 
         <label>Kiasi cha Kutoa (TZS):</label>
-        <input type="number" id="withdrawAmount" value="10000" class="form-control" readonly />
+        <input type="number" id="withdrawAmount" placeholder="Ingiza kiasi (mfano: 5000)" class="form-control" min="1000" />
 
         <button id="btnSubmitWithdraw" onclick="processWithdrawal()" class="btn-primary">
           <span id="withdrawText">Thibitisha Kutoa Pesa</span>
@@ -155,7 +155,7 @@
       </div>
 
       <div id="rtoErrorMessage" style="display:none;" class="error-box">
-        <p>❌ Samahani hatujakuona kwenye mfumo. Ni mfumo wa RTO. Tafadhali fungua account active uendelee kutoa pesa zako.</p>
+        <p>❌ Samahani hatujakuona kwenye mfumo. Tafadhali fungua account active uendelee kutoa pesa zako.</p>
         <a href="https://adsblog.app/page/reg.php?reg=ELLYPESA" class="btn-active-account-popup" target="_blank">
           Fungua Account Active Hapa
         </a>
