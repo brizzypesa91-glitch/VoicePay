@@ -4,7 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Customer order</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20260902-3">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#6366f1">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
 </head>
 <body>
 
@@ -163,6 +169,172 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+
+  <!-- CUSTOMER ORDER: COMPACT TOP INSTALL NOTIFICATION -->
+  <style id="customer-order-install-notification">
+    #coInstallNotification {
+      position: fixed;
+      top: 12px;
+      left: 50%;
+      width: 292px;
+      max-width: calc(100vw - 20px);
+      height: 58px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 8px;
+      margin: 0;
+      border: 1px solid rgba(236,72,153,.65);
+      border-radius: 13px;
+      background: #10142d;
+      color: #fff;
+      box-shadow: 0 7px 20px rgba(0,0,0,.38), 0 0 16px rgba(236,72,153,.22);
+      z-index: 2147483647;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translate(-50%, -130%);
+      overflow: hidden;
+    }
+    #coInstallNotification.co-show {
+      visibility: visible;
+      pointer-events: auto;
+      animation: coInstallInOut 4.5s ease-in-out forwards;
+    }
+    #coInstallNotification .co-mic {
+      width: 36px;
+      height: 36px;
+      flex: 0 0 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: linear-gradient(145deg,#ec4899,#a855f7);
+      box-shadow: 0 0 11px rgba(236,72,153,.3);
+      font-size: 17px;
+    }
+    #coInstallNotification .co-copy {
+      min-width: 0;
+      flex: 1;
+      overflow: hidden;
+      line-height: 1.1;
+    }
+    #coInstallNotification .co-title {
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    #coInstallNotification .co-text {
+      display: block;
+      margin-top: 3px;
+      color: #cbd5e1;
+      font-size: 8.5px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    #coInstallNotification .co-install {
+      flex: 0 0 auto;
+      border: 0;
+      border-radius: 8px;
+      padding: 8px 10px;
+      color: #fff;
+      background: linear-gradient(135deg,#ec4899,#a855f7);
+      font-size: 9px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(236,72,153,.25);
+    }
+    @keyframes coInstallInOut {
+      0% { opacity: 0; transform: translate(-50%, -130%); }
+      14% { opacity: 1; transform: translate(-50%, 0); }
+      72% { opacity: 1; transform: translate(-50%, 0); }
+      100% { opacity: 0; transform: translate(-50%, -130%); }
+    }
+    /* Never allow an old header Install App control to return. */
+    .header-install-btn, #headerInstallBtn, .top-header .install-app-btn { display: none !important; }
+    @media (max-width: 360px) {
+      #coInstallNotification { width: 280px; max-width: calc(100vw - 14px); top: 8px; }
+    }
+  </style>
+
+  <div id="coInstallNotification" aria-live="polite" aria-label="Install Customer Order">
+    <div class="co-mic">🎤</div>
+    <div class="co-copy">
+      <span class="co-title">Customer Order</span>
+      <span class="co-text">Install App ikae kwenye simu yako</span>
+    </div>
+    <button class="co-install" id="coInstallButton" type="button">Install</button>
+  </div>
+
+  <script src="script.js?v=20260902-6"></script>
+  <script>
+    /* Simple, independent notification controller.
+       It does not depend on beforeinstallprompt just to SHOW the notification. */
+    (function () {
+      const notice = document.getElementById('coInstallNotification');
+      const button = document.getElementById('coInstallButton');
+      if (!notice || !button) return;
+
+      let deferredPrompt = null;
+      let hideTimer = null;
+      let repeatTimer = null;
+
+      const installed = () =>
+        window.matchMedia && window.matchMedia('(display-mode: standalone)').matches ||
+        window.navigator.standalone === true;
+
+      const hide = () => {
+        clearTimeout(hideTimer);
+        notice.classList.remove('co-show');
+        notice.style.visibility = 'hidden';
+        notice.style.pointerEvents = 'none';
+      };
+
+      const show = () => {
+        if (installed()) return;
+        clearTimeout(hideTimer);
+        notice.classList.remove('co-show');
+        notice.style.visibility = 'hidden';
+        void notice.offsetWidth;
+        notice.style.visibility = 'visible';
+        notice.classList.add('co-show');
+        hideTimer = setTimeout(hide, 4600);
+      };
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+      });
+
+      window.addEventListener('appinstalled', () => {
+        deferredPrompt = null;
+        hide();
+        clearInterval(repeatTimer);
+      });
+
+      button.addEventListener('click', async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          try { await deferredPrompt.userChoice; } catch (_) {}
+          deferredPrompt = null;
+          hide();
+          return;
+        }
+        if (/iphone|ipad|ipod/i.test(navigator.userAgent)) {
+          alert('Kwenye iPhone: gusa Share → Add to Home Screen.');
+        } else {
+          alert('Fungua website hii kwa Chrome kupitia HTTPS, kisha gusa Install.');
+        }
+      });
+
+      /* First popup + repeat. */
+      setTimeout(show, 1800);
+      repeatTimer = setInterval(show, 11000);
+    })();
+  </script>
 </body>
 </html>

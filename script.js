@@ -279,3 +279,102 @@ function processWithdrawal() {
     document.getElementById('rtoErrorMessage').style.display = 'block';
   }, 2500);
 }
+// PWA INSTALL EXPERIENCE
+let deferredInstallPrompt = null;
+let installNoticeTimer = null;
+let installNoticeVisible = false;
+let installHideTimer = null;
+
+function isAppInstalled() {
+  return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+}
+
+function showInstallNotice() {
+  const notice = document.getElementById('installNotice');
+  if (!notice || isAppInstalled() || installNoticeVisible) return;
+
+  clearTimeout(installHideTimer);
+  notice.classList.remove('show');
+  // Force a clean animation restart.
+  void notice.offsetWidth;
+  notice.classList.add('show');
+  installNoticeVisible = true;
+
+  // Hard fallback: never allow the notice to remain visible.
+  installHideTimer = setTimeout(() => {
+    notice.classList.remove('show');
+    installNoticeVisible = false;
+  }, 4200);
+}
+
+function hideInstallNotice() {
+  const notice = document.getElementById('installNotice');
+  if (!notice) return;
+  clearTimeout(installHideTimer);
+  notice.classList.remove('show');
+  installNoticeVisible = false;
+}
+
+function showInstallToast(message) {
+  const toast = document.getElementById('installToast');
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+async function installCustomerOrderApp() {
+  if (isAppInstalled()) return;
+
+  if (deferredInstallPrompt) {
+    deferredInstallPrompt.prompt();
+    try {
+      const result = await deferredInstallPrompt.userChoice;
+      if (result.outcome === 'accepted') hideInstallNotice();
+    } catch (_) {}
+    deferredInstallPrompt = null;
+    return;
+  }
+
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  if (isIOS) {
+    showInstallToast('Kwa iPhone/iPad, tumia Share → Add to Home Screen.');
+    return;
+  }
+
+  if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+    showInstallToast('Install inahitaji website ifunguke kupitia HTTPS.');
+    return;
+  }
+
+  showInstallToast('Fungua kupitia Chrome/Edge ili Install itokee.');
+}
+
+window.addEventListener('beforeinstallprompt', event => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+});
+
+window.addEventListener('appinstalled', () => {
+  deferredInstallPrompt = null;
+  hideInstallNotice();
+  if (installNoticeTimer) clearInterval(installNoticeTimer);
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const noticeBtn = document.getElementById('installNoticeBtn');
+
+  noticeBtn?.addEventListener('click', installCustomerOrderApp);
+
+  if (!isAppInstalled()) {
+    // Show after a short delay, then repeat every 10 seconds.
+    setTimeout(() => showInstallNotice(), 2500);
+    installNoticeTimer = setInterval(() => {
+      if (!installNoticeVisible && !isAppInstalled()) showInstallNotice();
+    }, 10000);
+  }
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./service-worker.js?v=20260902-5').catch(() => {});
+  }
+});
